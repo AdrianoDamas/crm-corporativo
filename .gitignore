@@ -1,0 +1,32 @@
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build Results
+[Dd]ebug/**
+[Rr]elease/**
+[Bb]in/**
+[Oo]bj/**
+
+# Visual Studio 2019 config
+.vs/
+
+# Rider
+.idea/
+
+# NCrunch
+*.ncrunch*.local.xml
+*.ncrunch*.coverage
+*.ncrunch*.dll
+
+# Visual Studio Code
+.vscode/
+
+# DotNet Tools
+.lockfile
+
+# Other files
+*.db
+*.db-journal

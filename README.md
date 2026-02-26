@@ -1,27 +1,27 @@
 # CRM Corporativo
 
-## Project Description
+## Descrição do Projeto
 
-The CRM Corporativo is designed to streamline customer relationship management for businesses. It offers features such as lead management, sales tracking, and customer service support, all in one easy-to-use platform.
+O CRM Corporativo foi criado para simplificar a gestão do relacionamento com clientes. Ele reúne em uma única plataforma recursos como gerenciamento de leads, acompanhamento de vendas e suporte ao cliente, com uma interface simples de usar.
 
-## Setup Instructions
+## Instruções de Configuração
 
-To set up the CRM Corporativo project locally, follow these steps:
+Para preparar o projeto CRM Corporativo localmente, siga os passos abaixo:
 
-1. **Clone the Repository**
+1. **Clonar o Repositório**
    ```bash
    git clone https://github.com/AdrianoDamas/crm-corporativo.git
    cd crm-corporativo
    ```
 
-2. **Install Dependencies**
-   Make sure you have Docker and Docker Compose installed on your machine.
+2. **Instalar Dependências**
+   Certifique-se de que o Docker e o Docker Compose estejam instalados em sua máquina.
 
-3. **Run with Docker Compose**
-   To start the application, use the following command:
+3. **Executar com Docker Compose**
+   Para iniciar a aplicação, execute o comando:
    ```bash
    docker-compose up
    ```
 
-4. **Access the Application**
-   After the application starts, you can access it at `http://localhost:8080`.
+4. **Acessar a Aplicação**
+   Após a inicialização, acesse `http://localhost:8080` no navegador.

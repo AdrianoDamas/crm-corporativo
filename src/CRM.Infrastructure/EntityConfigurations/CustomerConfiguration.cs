@@ -15,34 +15,43 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.Type).IsRequired();
 
         // Document (ValueObject)
-        builder.OwnsOne(typeof(Document), "Document", doc =>
+        builder.OwnsOne(c => c.Document, doc =>
         {
-            doc.Property<string>("Value").HasColumnName("document_value").HasMaxLength(50);
-            doc.Property<int>("Type").HasColumnName("document_type");
+            doc.Property(d => d.Value)
+                .HasColumnName("document_value")
+                .HasMaxLength(50);
+
+            doc.Property(d => d.Type)
+                .HasColumnName("document_type")
+                .HasConversion<int>();
         });
 
         // Email (ValueObject)
-        builder.OwnsOne(typeof(Email), "Email", email =>
+        builder.OwnsOne(c => c.Email, email =>
         {
-            email.Property<string>("Value").HasColumnName("email").HasMaxLength(200);
+            email.Property(e => e.Value)
+                .HasColumnName("email")
+                .HasMaxLength(200);
         });
 
         // Phone (ValueObject)
-        builder.OwnsOne(typeof(PhoneNumber), "Phone", phone =>
+        builder.OwnsOne(c => c.Phone, phone =>
         {
-            phone.Property<string>("Value").HasColumnName("phone").HasMaxLength(20);
+            phone.Property(p => p.Value)
+                .HasColumnName("phone")
+                .HasMaxLength(20);
         });
 
         // Address (ValueObject)
-        builder.OwnsOne(typeof(Address), "Address", addr =>
+        builder.OwnsOne(c => c.Address, addr =>
         {
-            addr.Property<string>("Street").HasColumnName("street").HasMaxLength(200);
-            addr.Property<string>("Number").HasColumnName("number").HasMaxLength(50);
-            addr.Property<string?>("Complement").HasColumnName("complement").HasMaxLength(100);
-            addr.Property<string>("Neighborhood").HasColumnName("neighborhood").HasMaxLength(100);
-            addr.Property<string>("City").HasColumnName("city").HasMaxLength(100);
-            addr.Property<string>("State").HasColumnName("state").HasMaxLength(50);
-            addr.Property<string>("ZipCode").HasColumnName("zip_code").HasMaxLength(20);
+            addr.Property(a => a.Street).HasColumnName("street").HasMaxLength(200);
+            addr.Property(a => a.Number).HasColumnName("number").HasMaxLength(50);
+            addr.Property(a => a.Complement).HasColumnName("complement").HasMaxLength(100);
+            addr.Property(a => a.Neighborhood).HasColumnName("neighborhood").HasMaxLength(100);
+            addr.Property(a => a.City).HasColumnName("city").HasMaxLength(100);
+            addr.Property(a => a.State).HasColumnName("state").HasMaxLength(50);
+            addr.Property(a => a.ZipCode).HasColumnName("zip_code").HasMaxLength(20);
         });
 
         builder.Property(c => c.IsActive).IsRequired();

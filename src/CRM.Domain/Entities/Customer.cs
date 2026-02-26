@@ -73,9 +73,57 @@ public class Customer : AggregateRoot
         return customer;
     }
 
+    public void UpdateDetails(
+        string name,
+        Email email,
+        PhoneNumber? phone = null,
+        Address? address = null,
+        DateTime? birthDate = null,
+        string? stateRegistration = null,
+        bool? isStateRegistrationExempt = null)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name is required.", nameof(name));
+
+        Name = name;
+        Email = email;
+        Phone = phone;
+        Address = address;
+
+        if (Type == CustomerType.Individual)
+        {
+            if (!birthDate.HasValue)
+                throw new InvalidOperationException("Birth date is required when updating an individual customer.");
+
+            var today = DateTime.UtcNow.Date;
+            var age = (today - birthDate.Value.Date).Days / 365;
+            if (age < 18)
+                throw new InvalidOperationException("Customer must be at least 18 years old.");
+
+            BirthDate = birthDate;
+        }
+        else
+        {
+            var exempt = isStateRegistrationExempt ?? IsStateRegistrationExempt;
+            var registration = stateRegistration ?? StateRegistration;
+
+            if (!exempt && string.IsNullOrWhiteSpace(registration))
+                throw new InvalidOperationException("State registration (IE) is required for companies unless marked as exempt.");
+
+            StateRegistration = registration;
+            IsStateRegistrationExempt = exempt;
+        }
+
+        UpdatedAt = DateTime.UtcNow;
+    }
+
     public void Deactivate()
     {
+        if (!IsActive)
+            return;
+
         IsActive = false;
+        UpdatedAt = DateTime.UtcNow;
         RaiseDomainEvent(new Events.CustomerDeactivatedEvent(Id));
     }
 }
